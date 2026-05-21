@@ -38,6 +38,7 @@ Output: {"customer_name": "John Smith", "item": "laptop", "quantity": 3,
 > Most significant gain: format compliance 50%→100% — base model wrapped
 > all output in markdown code fences, breaking downstream JSON parsers.
 > Fine-tuned model outputs clean, parser-ready JSON every time.
+
 > *Results populated after training run. See `results/metrics.json`.*
 
 ---
