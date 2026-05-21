@@ -1,0 +1,115 @@
+{
+  "before": {
+    "label": "base_model",
+    "num_tests": 5,
+    "valid_json_rate": 0.8,
+    "field_accuracy": 0.057,
+    "format_compliance": 0.5,
+    "overall_score": 0.452,
+    "per_test": [
+      {
+        "test_id": 1,
+        "input_preview": "Customer: Alex Turner. Order #55821. 2x noise-cancelling hea...",
+        "valid_json": true,
+        "field_accuracy": 0.286,
+        "format_compliance": 0.5,
+        "output_preview": "```json\n\n{\n\n  \"customer\": \"Alex Turner\",\n\n  \"order_number\": \"55821\",\n\n  \"items\": [\n\n    {\n\n      \"it"
+      },
+      {
+        "test_id": 2,
+        "input_preview": "Event: Annual Tech Summit. Date: September 20-22. Venue: Mos...",
+        "valid_json": true,
+        "field_accuracy": 0.0,
+        "format_compliance": 0.5,
+        "output_preview": "```json\n\n{\n\n  \"Event\": \"Annual Tech Summit\",\n\n  \"Date\": \"September 20-22\",\n\n  \"Venue\": \"Moscone Cent"
+      },
+      {
+        "test_id": 3,
+        "input_preview": "Software package: numpy version 1.26.4. Language: Python. Li...",
+        "valid_json": false,
+        "field_accuracy": 0.0,
+        "format_compliance": 0.5,
+        "output_preview": "```json\n\n{\n\n  \"SoftwarePackage\": {\n\n    \"Name\": \"numpy\",\n\n    \"Version\": \"1onian version 1.26.4. Lan"
+      },
+      {
+        "test_id": 4,
+        "input_preview": "Hotel booking: Marriott Downtown. Room: Deluxe King. Check-i...",
+        "valid_json": true,
+        "field_accuracy": 0.0,
+        "format_compliance": 0.5,
+        "output_preview": "```json\n\n{\n\n  \"hotel_booking\": {\n\n    \"name\": \"Marriott Downtown\",\n\n    \"room\": \"Deluxe King\","
+      },
+      {
+        "test_id": 5,
+        "input_preview": "Pull request #342 by dev-john. Repo: backend-api. Title: Add...",
+        "valid_json": true,
+        "field_accuracy": 0.0,
+        "format_compliance": 0.5,
+        "output_preview": "```json\n\n{\n\n  \"pull_request\": {\n\n    \"id\": 342,\n\n    \"author\": \"dev-john\",\n\n    \"repository\": \"backe"
+      }
+    ]
+  },
+  "after": {
+    "label": "finetuned_model",
+    "num_tests": 5,
+    "valid_json_rate": 1.0,
+    "field_accuracy": 0.389,
+    "format_compliance": 1.0,
+    "overall_score": 0.796,
+    "per_test": [
+      {
+        "test_id": 1,
+        "input_preview": "Customer: Alex Turner. Order #55821. 2x noise-cancelling hea...",
+        "valid_json": true,
+        "field_accuracy": 0.714,
+        "format_compliance": 1.0,
+        "output_preview": "{\"customer_name\": \"Alex Turner\", \"order_number\": \"55821\", \"product\": \"noise-cancelling headphones\","
+      },
+      {
+        "test_id": 2,
+        "input_preview": "Event: Annual Tech Summit. Date: September 20-22. Venue: Mos...",
+        "valid_json": true,
+        "field_accuracy": 0.438,
+        "format_compliance": 1.0,
+        "output_preview": "{\"event_name\": \"Annual Tech Summit\", \"date\": \"2021-09-20/2021-09-22\", \"venue\": \"Moscone Center, San"
+      },
+      {
+        "test_id": 3,
+        "input_preview": "Software package: numpy version 1.26.4. Language: Python. Li...",
+        "valid_json": true,
+        "field_accuracy": 0.417,
+        "format_compliance": 1.0,
+        "output_preview": "{\"software_package\": \"numpy\", \"version\": \"1limp_1.26.4\", \"language\": \"Python\", \"license\": \"BSD\", \"do"
+      },
+      {
+        "test_id": 4,
+        "input_preview": "Hotel booking: Marriott Downtown. Room: Deluxe King. Check-i...",
+        "valid_json": true,
+        "field_accuracy": 0.375,
+        "format_compliance": 1.0,
+        "output_preview": "{\"hotel_name\": \"Marriott Downtown\", \"room_type\": \"Deluxe King\", \"check_in\": \"Oct 5\", \"check_out\": \"O"
+      },
+      {
+        "test_id": 5,
+        "input_preview": "Pull request #342 by dev-john. Repo: backend-api. Title: Add...",
+        "valid_json": true,
+        "field_accuracy": 0.0,
+        "format_compliance": 1.0,
+        "output_preview": "{\"pull_request\": {\"id\": 342, \"user\": \"dev-john\", \"repo\": \"backend-api\", \"title\": \"Add rate limiting"
+      }
+    ]
+  },
+  "improvement": {
+    "valid_json_improvement": 0.2,
+    "field_accuracy_improvement": 0.332,
+    "format_improvement": 0.5,
+    "overall_improvement": 0.344
+  },
+  "test_prompts": [
+    "<|user|>\nExtract structured JSON from the following text. Output ONLY valid JSON, nothing else.\n\nText: Customer: Alex Turner. Order #55821. 2x noise-cancelling headphones at $249 each. Shipping to 88 Pine Road, Seattle. Express delivery, 2 days.\n<|end|>\n<|assistant|>\n",
+    "<|user|>\nExtract structured JSON from the following text. Output ONLY valid JSON, nothing else.\n\nText: Event: Annual Tech Summit. Date: September 20-22. Venue: Moscone Center, San Francisco. Expected attendance: 5,000. Registration deadline: August 31. Fee: $299.\n<|end|>\n<|assistant|>\n",
+    "<|user|>\nExtract structured JSON from the following text. Output ONLY valid JSON, nothing else.\n\nText: Software package: numpy version 1.26.4. Language: Python. License: BSD. Downloads last month: 18M. Dependencies: none. Supports Python 3.9-3.12.\n<|end|>\n<|assistant|>\n",
+    "<|user|>\nExtract structured JSON from the following text. Output ONLY valid JSON, nothing else.\n\nText: Hotel booking: Marriott Downtown. Room: Deluxe King. Check-in: Oct 5. Check-out: Oct 8. Rate: $189/night. Total: $567. Guest: Nina Patel. Confirmation: HTL-29841.\n<|end|>\n<|assistant|>\n",
+    "<|user|>\nExtract structured JSON from the following text. Output ONLY valid JSON, nothing else.\n\nText: Pull request #342 by dev-john. Repo: backend-api. Title: Add rate limiting middleware. Status: Open. Files changed: 4. Lines added: 87. Lines removed: 12. Reviewers: alice, bob.\n<|end|>\n<|assistant|>\n"
+  ]
+}
