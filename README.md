@@ -1,4 +1,4 @@
-# Project 4 — LLM Fine-Tuning: SFT + DPO Pipeline
+# LLM Fine-Tuning: SFT + DPO Pipeline
 
 **Task:** JSON extraction — given unstructured text, output clean structured JSON  
 **Pipeline:** Base model → SFT (LoRA) → DPO preference tuning → 3-stage evaluation  
