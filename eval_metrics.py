@@ -1,8 +1,10 @@
 """
-evaluate.py — Before/After Fine-Tuning Evaluation
+eval_metrics.py — JSON Extraction Evaluation Metrics
+=====================================================
+Renamed from evaluate.py to avoid conflict with HuggingFace's evaluate library.
 
 Measures JSON extraction quality:
-  - Exact match: is the output valid parseable JSON?
+  - Valid JSON: is the output parseable JSON?
   - Field accuracy: what fraction of expected fields are present and correct?
   - Format compliance: does the output contain ONLY JSON (no extra text)?
 
@@ -13,6 +15,7 @@ Results saved to results/metrics.json
 import json
 import re
 from pathlib import Path
+from typing import List, Dict, Any
 
 # ─── TEST CASES (held-out, not in training data) ───────────────────────────────
 TEST_CASES = [
@@ -101,6 +104,7 @@ def is_valid_json(text: str) -> bool:
     except Exception:
         return False
 
+
 def parse_json_safe(text: str) -> dict:
     """Parse JSON from model output, handling common formatting issues."""
     try:
@@ -113,6 +117,7 @@ def parse_json_safe(text: str) -> dict:
     except Exception:
         pass
     return {}
+
 
 def field_accuracy(predicted: dict, expected: dict) -> float:
     """What fraction of expected fields are present with correct values."""
@@ -146,6 +151,7 @@ def field_accuracy(predicted: dict, expected: dict) -> float:
                     correct += 0.5  # partial credit
     return round(correct / len(expected), 3)
 
+
 def format_compliance(text: str) -> float:
     """Score 1.0 if output is ONLY JSON, 0.5 if JSON with extra text, 0.0 if no JSON."""
     stripped = text.strip()
@@ -157,7 +163,7 @@ def format_compliance(text: str) -> float:
 
 # ─── EVALUATION ───────────────────────────────────────────────────────────────
 
-def evaluate_outputs(model_outputs: list[str], label: str = "model") -> dict:
+def evaluate_outputs(model_outputs: List[str], label: str = "model") -> Dict[str, Any]:
     """
     Evaluate a list of model outputs against test cases.
     model_outputs: list of raw text outputs, one per test case.
@@ -207,7 +213,7 @@ def evaluate_outputs(model_outputs: list[str], label: str = "model") -> dict:
     return summary
 
 
-def compare_and_save(before_outputs: list[str], after_outputs: list[str]):
+def compare_and_save(before_outputs: List[str], after_outputs: List[str]):
     """Compare before and after fine-tuning, save to results/metrics.json"""
 
     print("\n" + "="*50)
@@ -253,6 +259,10 @@ def compare_and_save(before_outputs: list[str], after_outputs: list[str]):
 
 # ─── STANDALONE RUN ───────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    print("This script is called from the Colab notebook.")
-    print("It exports: TEST_CASES, PROMPT_TEMPLATE, compare_and_save()")
+    print("eval_metrics.py — Evaluation utilities for Project 4")
     print(f"Test cases loaded: {len(TEST_CASES)}")
+    print("\nExported symbols:")
+    print("  TEST_CASES          — 5 held-out JSON extraction test cases")
+    print("  PROMPT_TEMPLATE     — Phi-3 chat format template")
+    print("  evaluate_outputs()  — score a list of model outputs")
+    print("  compare_and_save()  — base vs SFT comparison")

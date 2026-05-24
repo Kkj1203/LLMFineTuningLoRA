@@ -1,0 +1,14 @@
+# requirements_amd.txt — AMD MI300X (ROCm) dependencies
+# Note: PyTorch with ROCm is pre-installed on AMD Developer Cloud instances
+# Run: pip install -r requirements_amd.txt
+
+transformers>=4.40.0
+datasets>=2.18.0
+accelerate>=0.28.0
+peft>=0.10.0
+trl>=0.8.6
+sentencepiece
+protobuf
+scipy
+einops
+huggingface_hub

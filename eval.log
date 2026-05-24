@@ -1,0 +1,56 @@
+`flash-attention` package not found, consider installing for better performance: No module named 'flash_attn'.
+Current `flash-attention` does not support `window_size`. Either upgrade or use `attn_implementation='eager'`.
+
+Loading base_model...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.88s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.37s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.45s/it]
+The `seen_tokens` attribute is deprecated and will be removed in v4.41. Use the `cache_position` model input instead.
+`get_max_cache()` is deprecated for all Cache classes. Use `get_max_cache_shape()` instead. Calling `get_max_cache()` will raise error from v4.48
+You are not running the flash-attention implementation, expect numerical differences.
+  [1] valid=True | accuracy=0.29 | compliance=0.5
+  [2] valid=True | accuracy=0.00 | compliance=0.5
+  [3] valid=True | accuracy=0.00 | compliance=0.5
+  [4] valid=True | accuracy=0.38 | compliance=0.5
+  [5] valid=True | accuracy=0.00 | compliance=0.5
+
+  ────────────────────────────────────────
+  Valid JSON:    100.0%
+  Field Accuracy:13.2%
+  Format Score:  50.0%
+  Overall:       0.544 / 1.000
+
+Loading sft_model...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.89s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.36s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.44s/it]
+  [1] valid=True | accuracy=0.57 | compliance=1.0
+  [2] valid=True | accuracy=0.56 | compliance=1.0
+  [3] valid=True | accuracy=0.67 | compliance=1.0
+  [4] valid=True | accuracy=0.50 | compliance=1.0
+  [5] valid=True | accuracy=0.89 | compliance=1.0
+
+  ────────────────────────────────────────
+  Valid JSON:    100.0%
+  Field Accuracy:63.8%
+  Format Score:  100.0%
+  Overall:       0.879 / 1.000
+
+Loading dpo_model...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.88s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.37s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.44s/it]
+  [1] valid=True | accuracy=0.29 | compliance=0.5
+  [2] valid=True | accuracy=0.00 | compliance=0.5
+  [3] valid=True | accuracy=0.00 | compliance=0.5
+  [4] valid=True | accuracy=0.00 | compliance=0.5
+  [5] valid=True | accuracy=0.00 | compliance=0.5
+
+  ────────────────────────────────────────
+  Valid JSON:    100.0%
+  Field Accuracy:5.7%
+  Format Score:  50.0%
+  Overall:       0.519 / 1.000
+
+============================================================
+THREE-STAGE RESULTS
+============================================================
+valid_json_rate        base=1.000  sft=1.000  dpo=1.000
+field_accuracy         base=0.132  sft=0.638  dpo=0.057
+format_compliance      base=0.500  sft=1.000  dpo=0.500
+overall_score          base=0.544  sft=0.879  dpo=0.519
+Saved → results/three_stage_metrics.json
