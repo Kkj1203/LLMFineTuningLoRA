@@ -1,0 +1,12 @@
+{
+  "training_config": {
+    "pairs": 500,
+    "epochs": 1,
+    "beta": 0.1,
+    "lr": 5e-05
+  },
+  "final_loss": 0.8037,
+  "train_time_s": 63.0,
+  "model": "microsoft/Phi-3-mini-4k-instruct",
+  "hardware": "AMD MI300X 192GB"
+}
